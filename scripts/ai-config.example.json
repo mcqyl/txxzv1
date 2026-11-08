@@ -1,0 +1,18 @@
+{
+  "text": {
+    "baseUrl": "https://your-llm-endpoint/v1",
+    "apiKey": "",
+    "model": "your-model"
+  },
+  "tts": {
+    "baseUrl": "https://your-tts-endpoint/v1",
+    "apiKey": "",
+    "model": "your-tts-model",
+    "voice": "your-voice"
+  },
+  "office": {
+    "baseUrl": "https://your-llm-endpoint/v1",
+    "apiKey": "",
+    "model": "your-model"
+  }
+}

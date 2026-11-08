@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#101322" />
+  <title>苔溪小镇 · 代码奇旅</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/assistant.css" />
+  <link rel="stylesheet" href="./styles/lesson.css" />
+  <link rel="stylesheet" href="./styles/office.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2317222c'/%3E%3Crect x='2' y='7' width='12' height='7' fill='%238fe3b0'/%3E%3Crect x='4' y='4' width='4' height='3' fill='%23f5e6c8'/%3E%3Crect x='9' y='5' width='4' height='2' fill='%23f5e6c8'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23ffd166'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div id="boot-splash" class="boot-splash">
+    <div class="boot-icon" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <p>正在铺好小镇的石板路…</p>
+  </div>
+
+  <!-- ============ 登录 / 注册 ============ -->
+  <section id="auth-screen" class="auth-screen" hidden>
+    <canvas id="auth-canvas" class="auth-canvas" aria-hidden="true"></canvas>
+    <div class="auth-glow" aria-hidden="true"></div>
+    <div class="auth-shell">
+      <header class="auth-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <i class="px px-a"></i><i class="px px-b"></i><i class="px px-c"></i><i class="px px-d"></i>
+        </div>
+        <div class="brand-copy">
+          <p class="brand-kicker">MOSS BROOK · CODE TOWN</p>
+          <h1>苔溪小镇<span>代码奇旅</span></h1>
+          <p class="brand-line">在小镇里散步、学习、把家装扮成喜欢的样子。</p>
+        </div>
+      </header>
+
+      <div class="auth-panel">
+        <div class="auth-tabs" role="tablist" aria-label="账号操作">
+          <button type="button" class="auth-tab is-active" data-auth-mode="login" role="tab" aria-selected="true">登录</button>
+          <button type="button" class="auth-tab" data-auth-mode="register" role="tab" aria-selected="false">创建新角色</button>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="field">
+            <label for="login-username">角色名（游戏名）</label>
+            <input id="login-username" name="username" type="text" maxlength="16" autocomplete="username" placeholder="输入你的游戏名字" required />
+          </div>
+          <div class="field">
+            <label for="login-password">密码</label>
+            <div class="input-wrap">
+              <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="至少 6 位" required />
+              <button type="button" class="eye-btn" data-eye="login-password" aria-label="显示密码">显示</button>
+            </div>
+          </div>
+          <p class="form-error" id="login-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-wide" id="login-submit">
+            <span>进入小镇</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </button>
+          <p class="form-hint">第一次来？输入一个还没用过的名字和密码，会直接创建角色并进入小镇。已注册的角色需要输入正确的密码。</p>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden novalidate>
+          <div class="field">
+            <label for="reg-username">角色名（游戏名）</label>
+            <input id="reg-username" name="username" type="text" maxlength="16" autocomplete="nickname" placeholder="2–16 个字符，会显示在角色头顶" required />
+          </div>
+          <div class="field">
+            <label for="reg-email">邮箱 <span class="field-optional">可选</span></label>
+            <input id="reg-email" name="email" type="email" autocomplete="email" placeholder="可以留空" />
+          </div>
+          <div class="field">
+            <label for="reg-phone">手机号 <span class="field-optional">可选</span></label>
+            <input id="reg-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="可以留空" />
+          </div>
+          <div class="field">
+            <label for="reg-password">密码</label>
+            <div class="input-wrap">
+              <input id="reg-password" name="password" type="password" autocomplete="new-password" placeholder="至少 6 位" required />
+              <button type="button" class="eye-btn" data-eye="reg-password" aria-label="显示密码">显示</button>
+            </div>
+          </div>
+          <p class="form-error" id="register-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary btn-wide" id="register-submit">
+            <span>创建角色并开始</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </button>
+          <p class="form-hint">邮箱和手机号都可以留空；以后登录只需要角色名和密码。注册后会获得一间属于自己的小屋和一份初始行囊。</p>
+        </form>
+
+        <div class="auth-footnote">
+          <span class="dot-live" aria-hidden="true"></span>
+          <span>本地存档 · 大厅联机 · 键盘游玩</span>
+        </div>
+      </div>
+
+      <p class="auth-tip">“别急着赶路，小镇会在你学习时悄悄长大。”</p>
+    </div>
+    <div class="auth-corner">WASD 移动 · E 交互 · TAB 功能全览</div>
+  </section>
+
+  <!-- ============ 游戏 ============ -->
+  <section id="game-screen" class="game-screen" hidden>
+    <div id="game-stage" class="game-stage">
+      <canvas id="game-canvas" class="game-canvas"></canvas>
+      <div id="world-labels" class="world-labels" aria-hidden="true"></div>
+      <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+      <div id="scene-fade" class="scene-fade"></div>
+    </div>
+
+    <div id="hud" class="hud">
+      <div class="hud-left">
+        <div class="profile-card" id="profile-card">
+          <div class="avatar-frame" id="player-avatar" aria-hidden="true">
+            <canvas id="avatar-canvas" width="16" height="16"></canvas>
+          </div>
+          <div class="profile-main">
+            <div class="profile-top">
+              <span class="profile-name" id="hud-name">旅行者</span>
+              <span class="level-chip" id="hud-level">Lv.1</span>
+              <span class="admin-chip" id="admin-chip" title="小镇管理员" hidden>OP</span>
+            </div>
+            <div class="xp-track" aria-hidden="true"><i id="hud-xp-fill"></i></div>
+            <div class="profile-bottom">
+              <span id="hud-xp-label">0 / 80 XP</span>
+              <span class="coin-line"><i class="coin" aria-hidden="true"></i><b id="hud-coins">0</b></span>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="quest-chip" id="quest-chip" title="打开每日任务 (G)" hidden>
+          <span class="quest-label">今日任务</span>
+          <span id="quest-text">完成 1 次课程练习</span>
+          <span class="quest-progress" id="quest-progress">0/1</span>
+        </button>
+        <div class="zone-chip" id="zone-chip">苔溪小镇 · 中央广场</div>
+        <div class="clock-chip" id="clock-chip">
+          <span class="clock-icon" id="clock-icon" aria-hidden="true">☀</span>
+          <b id="hud-clock">16:36</b>
+          <span id="hud-phase">午后</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="mode-chip">
+          <span class="dot-live" id="net-dot" aria-hidden="true"></span>
+          <span id="net-state">正在连上小镇…</span>
+          <span class="save-state" id="save-state">已保存</span>
+        </div>
+        <button type="button" class="online-chip" id="online-chip" title="查看在线朋友 (O)">
+          <span class="people-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span id="online-label">小镇 · 1 人在线</span>
+        </button>
+      </div>
+
+      <div class="friends-panel" id="friends-panel" hidden aria-label="小镇在线朋友">
+        <header class="friends-head">
+          <div class="friends-title"><b>苔溪在线</b><span id="friends-count">1 人</span></div>
+          <button type="button" class="friends-close" id="friends-close" aria-label="关闭在线面板">×</button>
+        </header>
+        <label class="friends-toggle">
+          <input type="checkbox" id="hide-others" />
+          <span class="toggle-track" aria-hidden="true"><i></i></span>
+          <span>不看其他玩家</span>
+        </label>
+        <p class="friends-note" id="friends-note">按 T 在大厅里聊天。</p>
+        <div class="friends-list" id="friends-list"></div>
+        <div class="friends-foot">
+          <button type="button" class="mini-btn" id="friends-cabin-action" hidden>离开小屋</button>
+        </div>
+      </div>
+
+      <div class="chat-layer" id="chat-layer" aria-live="polite">
+        <div class="chat-log" id="chat-log" aria-label="小镇聊天记录"></div>
+        <form class="chat-form" id="chat-form" hidden>
+          <span class="chat-channel" id="chat-channel">大厅</span>
+          <span class="chat-prefix" aria-hidden="true">&gt;</span>
+          <input id="chat-input" class="chat-input" type="text" maxlength="120" autocomplete="off"
+            spellcheck="false" placeholder="和小镇里的朋友说点什么…  Enter 发送 · Esc 关闭" aria-label="聊天输入" />
+          <span class="chat-count" id="chat-count">0/120</span>
+        </form>
+      </div>
+
+      <div class="invite-pop" id="invite-pop" hidden role="dialog" aria-label="串门邀请">
+        <div class="invite-pixel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="invite-copy">
+          <b><span id="invite-from">朋友</span> 邀请你去 TA 的小屋</b>
+          <small id="invite-sub">一起看看布置，在窗边坐一会儿。</small>
+        </div>
+        <div class="invite-actions">
+          <button type="button" class="mini-btn is-primary" id="invite-accept">去坐坐</button>
+          <button type="button" class="mini-btn" id="invite-decline">谢绝</button>
+        </div>
+        <i class="invite-timer" aria-hidden="true"><span id="invite-timer-fill"></span></i>
+      </div>
+
+      <div class="invite-pop tp-pop" id="tp-pop" hidden role="dialog" aria-label="传送请求">
+        <div class="invite-pixel tp-pixel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="invite-copy">
+          <b><span id="tp-from">朋友</span> 想传送到你身边</b>
+          <small id="tp-sub">同意后，TA 会出现在你旁边。管理员可以直接传送。</small>
+        </div>
+        <div class="invite-actions">
+          <button type="button" class="mini-btn is-primary" id="tp-accept">同意</button>
+          <button type="button" class="mini-btn" id="tp-decline">拒绝</button>
+        </div>
+        <i class="invite-timer" aria-hidden="true"><span id="tp-timer-fill"></span></i>
+      </div>
+
+      <div class="controls-hint" id="controls-hint">
+        <div class="key-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>移动</span><kbd>Shift</kbd><span>奔跑</span></div>
+        <div class="key-row"><kbd>E</kbd><span>交互</span><kbd>F</kbd><span>布置</span><kbd>Tab</kbd><span>功能全览</span></div>
+        <div class="key-row"><kbd>C</kbd><span>课程</span><kbd>G</kbd><span>任务</span><kbd>T</kbd><span>聊天</span><kbd>O</kbd><span>在线</span><kbd>M</kbd><span>地图</span></div>
+        <button type="button" class="hint-toggle" id="hint-toggle" aria-label="收起操作提示">收起</button>
+      </div>
+
+      <div id="interact-prompt" class="interact-prompt" hidden>
+        <kbd>E</kbd>
+        <span id="interact-text">交互</span>
+      </div>
+
+      <button type="button" class="overview-launcher" id="overview-launcher" aria-label="打开功能全览 (Tab)">
+        <span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="overview-copy">
+          <b>功能全览</b>
+          <small>Tab</small>
+        </span>
+      </button>
+
+      <div id="edit-bar" class="edit-bar" hidden></div>
+      <div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+    </div>
+
+    <div id="modal-root" class="modal-root" hidden></div>
+    <div id="lesson-root" class="lesson-root" hidden></div>
+  </section>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

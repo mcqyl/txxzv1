@@ -1,0 +1,8 @@
+node_modules
+.git
+.gitignore
+scripts/ai-config.json
+scripts/mp-admins.json
+scripts/mp-bans.json
+*.log
+.DS_Store

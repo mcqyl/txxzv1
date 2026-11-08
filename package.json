@@ -1,0 +1,11 @@
+{
+  "name": "mossbrook-code-town",
+  "version": "1.1.0",
+  "private": true,
+  "description": "苔溪小镇 · 代码奇旅 — 像素风编程学习小镇（浏览器联机版）",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}

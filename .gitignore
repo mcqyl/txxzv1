@@ -1,0 +1,21 @@
+# AI 密钥（只提交 ai-config.example.json）
+scripts/ai-config.json
+
+# 运行时生成的管理 / 封禁名单
+scripts/mp-admins.json
+scripts/mp-bans.json
+
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.idea/
+.vscode/
